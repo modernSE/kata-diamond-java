@@ -1,36 +1,44 @@
 package de.cas.mse.exercise.diamond;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+import static java.util.stream.Collectors.joining;
 
 public class Diamond {
 
 	
-	public String printDiamond(int diamondSize) {
-		if (diamondSize <= 0 || diamondSize % 2 == 0) {
+	public String printDiamond(Integer diamondSize) {
+		if (lowerEqualZero(diamondSize) || isEven(diamondSize)) {
 			return null;
 		}
-		StringBuilder diamond = new StringBuilder();
-		String maxStarsRow = new String(createDiamondRow(diamondSize, diamondSize));
-		diamond.append(maxStarsRow);
-		int starNumber = diamondSize - 2;
+		List<DiamondLine> diamond = new LinkedList<>();
+		DiamondLine maxStarsRow = createDiamondRow(diamondSize, diamondSize);
+		diamond.add(maxStarsRow);
+		Integer starNumber = diamondSize - new Integer(2);
 		while (starNumber > 0){
-			char[] diamondRow = createDiamondRow(diamondSize, starNumber);
-			diamond.insert(0, diamondRow);
-			diamond.append(diamondRow);
+			DiamondLine diamondRow = createDiamondRow(diamondSize, starNumber);
+			diamond.add(0, diamondRow);
+			diamond.add(diamondRow);
 			starNumber -= 2;
 		}
-		return diamond.toString();
+		return diamond.stream()//
+				.map(DiamondLine::toString)//
+				.collect(joining());
 	}
 
-	private char[] createDiamondRow(int diamondSize, int starNumber) {
-		int spaceNumber = ((diamondSize - starNumber) / 2);
-		char[] diamondRow = new char[spaceNumber + starNumber + 1];
-		if (spaceNumber > 0) {
-			Arrays.fill(diamondRow, 0, spaceNumber, ' ');
-		}
-		Arrays.fill(diamondRow, spaceNumber, spaceNumber + starNumber, '*');
-		diamondRow[diamondRow.length - 1] = '\n';
-		return diamondRow;
+
+	private DiamondLine createDiamondRow(Integer diamondSize, Integer starNumber) {
+		Integer spaceNumber = ((diamondSize - starNumber) / 2);
+		return new DiamondLine(spaceNumber, starNumber);
 	}
 
+	private Boolean isEven(Integer value) {
+		return value % 2 == 0;
+	}
+	
+	private Boolean lowerEqualZero(Integer value) {
+		return value <= 0;
+	}
 }
