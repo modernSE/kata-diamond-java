@@ -4,28 +4,33 @@ import java.util.Arrays;
 
 public class Diamond {
 
-	public String print(int n) {
-		if (n <= 0 || n % 2 == 0) {
+	
+	public String printDiamond(int diamondSize) {
+		if (diamondSize <= 0 || diamondSize % 2 == 0) {
 			return null;
 		}
-		StringBuilder builder = new StringBuilder(new String(make(n, n)));
-		for (int i = n - 2; i > 0; i -= 2) {
-			char[] chars = make(n, i);
-			builder.insert(0, chars);
-			builder.append(chars);
+		StringBuilder diamond = new StringBuilder();
+		String maxStarsRow = new String(createDiamondRow(diamondSize, diamondSize));
+		diamond.append(maxStarsRow);
+		int starNumber = diamondSize - 2;
+		while (starNumber > 0){
+			char[] diamondRow = createDiamondRow(diamondSize, starNumber);
+			diamond.insert(0, diamondRow);
+			diamond.append(diamondRow);
+			starNumber -= 2;
 		}
-		return builder.toString();
+		return diamond.toString();
 	}
 
-	private char[] make(int i, int j) {
-		int amount = ((i - j) / 2);
-		char[] chars = new char[amount + j + 1];
-		if (amount > 0) {
-			Arrays.fill(chars, 0, amount, ' ');
+	private char[] createDiamondRow(int diamondSize, int starNumber) {
+		int spaceNumber = ((diamondSize - starNumber) / 2);
+		char[] diamondRow = new char[spaceNumber + starNumber + 1];
+		if (spaceNumber > 0) {
+			Arrays.fill(diamondRow, 0, spaceNumber, ' ');
 		}
-		Arrays.fill(chars, amount, amount + j, '*');
-		chars[chars.length - 1] = '\n';
-		return chars;
+		Arrays.fill(diamondRow, spaceNumber, spaceNumber + starNumber, '*');
+		diamondRow[diamondRow.length - 1] = '\n';
+		return diamondRow;
 	}
 
 }
