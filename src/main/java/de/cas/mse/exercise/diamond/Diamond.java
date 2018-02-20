@@ -4,28 +4,35 @@ import java.util.Arrays;
 
 public class Diamond {
 
-	public String print(int n) {
-		if (n <= 0 || n % 2 == 0) {
+	private static final char EMPTY_SYMBOL = ' ';
+	private static final char DIAMOND_SYMBOL = '*';
+
+	public String print(int diamondWidth) {
+		
+		if (diamondWidth <= 0 || diamondWidth % 2 == 0) {
 			return null;
 		}
-		StringBuilder builder = new StringBuilder(new String(make(n, n)));
-		for (int i = n - 2; i > 0; i -= 2) {
-			char[] chars = make(n, i);
-			builder.insert(0, chars);
-			builder.append(chars);
+		
+		StringBuilder builder = new StringBuilder();
+		builder.append(getDiamondLine(diamondWidth, diamondWidth));
+		
+		for (int leadingSpaces = diamondWidth - 2; leadingSpaces > 0; leadingSpaces -= 2) {
+			char[] line = getDiamondLine(diamondWidth, leadingSpaces);
+			builder.insert(0, line);
+			builder.append(line);
 		}
 		return builder.toString();
 	}
 
-	private char[] make(int i, int j) {
-		int amount = ((i - j) / 2);
-		char[] chars = new char[amount + j + 1];
-		if (amount > 0) {
-			Arrays.fill(chars, 0, amount, ' ');
+	private char[] getDiamondLine(int diamondWidth, int leadingSpaces) {
+		int numberOfDiamondSymbols = ((diamondWidth - leadingSpaces) / 2);
+		char[] line = new char[numberOfDiamondSymbols + leadingSpaces + 1];
+		if (numberOfDiamondSymbols > 0) {
+			Arrays.fill(line, 0, numberOfDiamondSymbols, EMPTY_SYMBOL);
 		}
-		Arrays.fill(chars, amount, amount + j, '*');
-		chars[chars.length - 1] = '\n';
-		return chars;
+		Arrays.fill(line, numberOfDiamondSymbols, numberOfDiamondSymbols + leadingSpaces, DIAMOND_SYMBOL);
+		line[line.length - 1] = '\n';
+		return line;
 	}
 
 }
