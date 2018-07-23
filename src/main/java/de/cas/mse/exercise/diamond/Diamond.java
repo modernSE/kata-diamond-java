@@ -4,28 +4,33 @@ import java.util.Arrays;
 
 public class Diamond {
 
-	public String print(int n) {
-		if (n <= 0 || n % 2 == 0) {
+	public String print(int size) {
+		// extract to method
+		if (size <= 0 || size % 2 == 0) {
 			return null;
 		}
-		StringBuilder builder = new StringBuilder(new String(make(n, n)));
-		for (int i = n - 2; i > 0; i -= 2) {
-			char[] chars = make(n, i);
+		// it helped to understand the code if the string param would be
+		// stored in a var like middleLine/ middleRow
+		StringBuilder builder = new StringBuilder(new String(makeLine(size, size)));
+		// i = amountOfStars
+		for (int i = size - 2; i > 0; i -= 2) {
+			// chars -> line/row
+			char[] chars = makeLine(size, i);
 			builder.insert(0, chars);
 			builder.append(chars);
 		}
 		return builder.toString();
 	}
 
-	private char[] make(int i, int j) {
-		int amount = ((i - j) / 2);
-		char[] chars = new char[amount + j + 1];
-		if (amount > 0) {
-			Arrays.fill(chars, 0, amount, ' ');
+	private char[] makeLine(int maxAmountOfStars, int amountOfStars) {
+		int amountOfSpaces = ((maxAmountOfStars - amountOfStars) / 2);
+		char[] line = new char[amountOfSpaces + amountOfStars + 1];
+		if (amountOfSpaces > 0) {
+			Arrays.fill(line, 0, amountOfSpaces, ' ');
 		}
-		Arrays.fill(chars, amount, amount + j, '*');
-		chars[chars.length - 1] = '\n';
-		return chars;
+		Arrays.fill(line, amountOfSpaces, amountOfSpaces + amountOfStars, '*');
+		line[line.length - 1] = '\n';
+		return line;
 	}
 
 }
