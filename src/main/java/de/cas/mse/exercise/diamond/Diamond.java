@@ -25,7 +25,7 @@ public class Diamond {
 		// totalNumOfStars ist nicht eindeutig, man könnte hier auch eine Summe vermuten
 		// Vorschlag: maxNumOfStars
 		// wieso nicht sizeOfDiamond wie in Line 12? 
-		// 
+		// unterschiedliche Benennung legitim, weil innerhalb der Methode am passendsten
 		int numOfSpaces = ((totalNumOfStars - numOfStars) / 2);
 		char[] row = new char[numOfSpaces + numOfStars + 1];
 		if (numOfSpaces > 0) {
