@@ -1,0 +1,2 @@
+# diamond-java
+Diamond Kata
