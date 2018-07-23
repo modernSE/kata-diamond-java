@@ -4,28 +4,37 @@ import java.util.Arrays;
 
 public class Diamond {
 
-	public String print(int n) {
-		if (n <= 0 || n % 2 == 0) {
+	/*
+	 * - size should be renamed to sizeOfDiamond (?)
+	 * - i should be renamed to numOfStars
+	 */
+	public String print(int size) {
+		// Extract to seperate method -> isNegati.....
+		if (size <= 0 || size % 2 == 0) {
 			return null;
 		}
-		StringBuilder builder = new StringBuilder(new String(make(n, n)));
-		for (int i = n - 2; i > 0; i -= 2) {
-			char[] chars = make(n, i);
-			builder.insert(0, chars);
-			builder.append(chars);
+		// Could ve confusing to rename the builder
+		// Extract new String(createLine...) to var -> middleLine
+		StringBuilder lines = new StringBuilder(new String(createLine(size, size)));
+		for (int i = size - 2; i > 0; i -= 2) {
+			char[] line = createLine(size, i);
+			lines.insert(0, line);
+			lines.append(line);
 		}
-		return builder.toString();
+		return lines.toString();
 	}
-
-	private char[] make(int i, int j) {
-		int amount = ((i - j) / 2);
-		char[] chars = new char[amount + j + 1];
-		if (amount > 0) {
-			Arrays.fill(chars, 0, amount, ' ');
+	
+	/*
+	 * - size should be renamed to sizeOfDiamond
+	 */
+	private char[] createLine(int size, int numberOfStars) {
+		int numberOfSpaces = ((size - numberOfStars) / 2);
+		char[] line = new char[numberOfSpaces + numberOfStars + 1];
+		if (numberOfSpaces > 0) {
+			Arrays.fill(line, 0, numberOfSpaces, ' ');
 		}
-		Arrays.fill(chars, amount, amount + j, '*');
-		chars[chars.length - 1] = '\n';
-		return chars;
+		Arrays.fill(line, numberOfSpaces, numberOfSpaces + numberOfStars, '*');
+		line[line.length - 1] = '\n';
+		return line;
 	}
-
 }
