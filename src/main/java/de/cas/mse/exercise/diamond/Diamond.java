@@ -1,7 +1,7 @@
 package de.cas.mse.exercise.diamond;
 
 import java.util.Arrays;
-
+//b
 public class Diamond {
 
 	public String print(int n) {
