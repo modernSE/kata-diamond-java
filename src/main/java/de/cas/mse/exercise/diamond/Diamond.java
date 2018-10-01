@@ -1,5 +1,5 @@
 package de.cas.mse.exercise.diamond;
-
+//e
 import java.util.Arrays;
 
 public class Diamond {
