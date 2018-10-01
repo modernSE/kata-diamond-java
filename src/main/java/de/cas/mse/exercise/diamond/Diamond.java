@@ -3,7 +3,7 @@ package de.cas.mse.exercise.diamond;
 import java.util.Arrays;
 
 public class Diamond {
-//d
+
 	public String print(int n) {
 		if (n <= 0 || n % 2 == 0) {
 			return null;
