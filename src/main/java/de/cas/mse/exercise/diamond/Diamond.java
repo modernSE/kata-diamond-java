@@ -4,28 +4,36 @@ import java.util.Arrays;
 
 public class Diamond {
 
-	public String print(int n) {
-		if (n <= 0 || n % 2 == 0) {
+	public String create(int width) { //maxDiamondWidth?
+		
+		if (width <= 0 || width % 2 == 0) {
 			return null;
 		}
-		StringBuilder builder = new StringBuilder(new String(make(n, n)));
-		for (int i = n - 2; i > 0; i -= 2) {
-			char[] chars = make(n, i);
-			builder.insert(0, chars);
-			builder.append(chars);
+		
+		StringBuilder result = new StringBuilder(new String(drawLine(width, width)));
+		
+		for (int currentWidth = width - 2; currentWidth > 0; currentWidth -= 2) {
+			char[] line = drawLine(width, currentWidth);
+			result.insert(0, line);
+			result.append(line); // Umwandeln in Insert
 		}
-		return builder.toString();
+		
+		return result.toString(); // Variable mit Name result sollte bereits Returnwert entsprechen
 	}
 
-	private char[] make(int i, int j) {
-		int amount = ((i - j) / 2);
-		char[] chars = new char[amount + j + 1];
-		if (amount > 0) {
-			Arrays.fill(chars, 0, amount, ' ');
+	private char[] drawLine(int maxWidth, int currentWidth) {
+		
+		int offset = ((maxWidth - currentWidth) / 2); // Offset von was?
+		char[] line = new char[offset + currentWidth + 1];
+		
+		if (offset > 0) {
+			Arrays.fill(line, 0, offset, ' ');
 		}
-		Arrays.fill(chars, amount, amount + j, '*');
-		chars[chars.length - 1] = '\n';
-		return chars;
+		
+		Arrays.fill(line, offset, offset + currentWidth, '*');
+		line[line.length - 1] = '\n';
+		
+		return line;
 	}
 
 }
