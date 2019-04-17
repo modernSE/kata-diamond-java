@@ -4,28 +4,31 @@ import java.util.Arrays;
 
 public class Diamond {
 
-	public String print(int n) {
-		if (n <= 0 || n % 2 == 0) {
+	public String print(int size) { // vielleicht max width/size 
+		if (size <= 0 || size % 2 == 0) { 
 			return null;
 		}
-		StringBuilder builder = new StringBuilder(new String(make(n, n)));
-		for (int i = n - 2; i > 0; i -= 2) {
-			char[] chars = make(n, i);
-			builder.insert(0, chars);
-			builder.append(chars);
+		
+		StringBuilder builder = new StringBuilder(new String(buildRow(size, size))); 
+		for (int amoundOfStars = size - 2; amoundOfStars > 0; amoundOfStars -= 2) { 
+			char[] row = buildRow(size, amoundOfStars); // amount of stars per row
+			builder.insert(0, row);
+			builder.append(row);
 		}
 		return builder.toString();
 	}
-
-	private char[] make(int i, int j) {
-		int amount = ((i - j) / 2);
-		char[] chars = new char[amount + j + 1];
-		if (amount > 0) {
-			Arrays.fill(chars, 0, amount, ' ');
+	// maybe some line breaks
+	private char[] buildRow(int sizeOfDiamond, int amountOfStars) { //amount per row
+		int whiteSpaceLeft = ((sizeOfDiamond - amountOfStars) / 2); 
+		char[] row = new char[whiteSpaceLeft + amountOfStars + 1]; 
+		if (whiteSpaceLeft > 0) {
+			Arrays.fill(row, 0, whiteSpaceLeft, ' ');
 		}
-		Arrays.fill(chars, amount, amount + j, '*');
-		chars[chars.length - 1] = '\n';
-		return chars;
+		Arrays.fill(row, whiteSpaceLeft, whiteSpaceLeft + amountOfStars, '*');
+		row[row.length - 1] = '\n';
+		return row;
 	}
+	
+
 
 }
