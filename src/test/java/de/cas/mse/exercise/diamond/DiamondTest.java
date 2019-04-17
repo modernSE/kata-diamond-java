@@ -15,6 +15,7 @@ public class DiamondTest {
 
 		assertEquals(expected.toString(), new Diamond().print(3));
 	}
+	
 
 	@Test
 	public void diamond5_shouldPrint() {
