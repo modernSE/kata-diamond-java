@@ -4,28 +4,51 @@ import java.util.Arrays;
 
 public class Diamond {
 
-	public String print(int n) {
-		if (n <= 0 || n % 2 == 0) {
+	private static final int starsDecreaseStep = 2;
+
+	public String print(int diamondWidth) {
+		if (isValidDiamondWidth(diamondWidth)) {
 			return null;
 		}
-		StringBuilder builder = new StringBuilder(new String(make(n, n)));
-		for (int i = n - 2; i > 0; i -= 2) {
-			char[] chars = make(n, i);
-			builder.insert(0, chars);
-			builder.append(chars);
-		}
-		return builder.toString();
+		
+		return createDiamond(diamondWidth);
+	}
+	
+	private boolean isValidDiamondWidth(int maxDiamonWidth) {
+		return maxDiamonWidth <= 0 || maxDiamonWidth % 2 == 0;
 	}
 
-	private char[] make(int i, int j) {
-		int amount = ((i - j) / 2);
-		char[] chars = new char[amount + j + 1];
-		if (amount > 0) {
-			Arrays.fill(chars, 0, amount, ' ');
+	private String createDiamond(int maxDiamonWidth) {
+		StringBuilder diamondBuilder = new StringBuilder(createMiddleRow(maxDiamonWidth));
+		for (int starsInCurrentRow = maxDiamonWidth - starsDecreaseStep; starsInCurrentRow > 0; starsInCurrentRow -= starsDecreaseStep) {
+			char[] row = createRow(maxDiamonWidth, starsInCurrentRow);
+			addRowAbove(diamondBuilder, row);
+			addRowBelow(diamondBuilder, row);
 		}
-		Arrays.fill(chars, amount, amount + j, '*');
-		chars[chars.length - 1] = '\n';
-		return chars;
+		return diamondBuilder.toString();
+	}
+
+	private void addRowBelow(StringBuilder diamondBuilder, char[] row) {
+		diamondBuilder.append(row);
+	}
+
+	private void addRowAbove(StringBuilder diamondBuilder, char[] row) {
+		diamondBuilder.insert(0, row);
+	}
+
+	private String createMiddleRow(int maxDiamonWidth) {
+		return new String(createRow(maxDiamonWidth, maxDiamonWidth));
+	}
+
+	private char[] createRow(int charsInRow, int starsInRow) {
+		int spacesBeforeStars = ((charsInRow - starsInRow) / 2);
+		char[] row = new char[spacesBeforeStars + starsInRow + 1];
+		if (spacesBeforeStars > 0) {
+			Arrays.fill(row, 0, spacesBeforeStars, ' ');
+		}
+		Arrays.fill(row, spacesBeforeStars, spacesBeforeStars + starsInRow, '*');
+		row[row.length - 1] = '\n';
+		return row;
 	}
 
 }
