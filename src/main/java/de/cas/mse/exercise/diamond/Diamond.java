@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class Diamond {
 
 	public String print(int diamondHeight) {
+		//Muss negiert werden
 		if (isValidHeight(diamondHeight)) {
 			return null;
 		}
@@ -18,6 +19,7 @@ public class Diamond {
 	}
 
 	private StringBuilder addRowsSymetrically(int totalWidth, StringBuilder builder, int currentWidth) {
+		//currentWidth ist hier allerdings nicht die aktuelle Breite, sondern Anzahl der Sterne
 		String currentRow = buildRow(totalWidth, currentWidth);
 		addRowAbove(builder, currentRow);
 		addRowBelow(builder, currentRow);
@@ -41,10 +43,11 @@ public class Diamond {
 	}
 
 	private String buildRow(int totalDiamondWidth, int numberOfStars) {
-		
+		//which side? ;) 
 		int whiteSpacesOnOneSide = (totalDiamondWidth-numberOfStars) / 2;
 		char[] row = new char[calculateRowWidth(numberOfStars, whiteSpacesOnOneSide)];
 		
+		//linke Seite hilfreich?
 		row = fillWhiteSpaces(whiteSpacesOnOneSide, row);
 		
 		row = fillStars(numberOfStars, whiteSpacesOnOneSide, row);
