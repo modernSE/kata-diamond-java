@@ -8,7 +8,7 @@ public class Diamond {
 	private static final int starsDecreaseStep = 2; // confusing
 
 	public String print(int diamondWidth) {
-		if (isValidDiamondWidth(diamondWidth)) { // clear naming :thumbs_up:
+		if (isValidDiamondWidth(diamondWidth)) { // clear naming :thumbs_up: => but wrong: "isInvalid"
 			return null;
 		}
 		
@@ -21,7 +21,7 @@ public class Diamond {
 
 	private String createDiamond(int maxDiamonWidth) {
 		StringBuilder diamondBuilder = new StringBuilder(createMiddleRow(maxDiamonWidth));
-		// hard to understand for
+		// hard to understand for => typo!
 		for (int starsInCurrentRow = maxDiamonWidth - starsDecreaseStep; starsInCurrentRow > 0; starsInCurrentRow -= starsDecreaseStep) {
 			char[] row = createRow(maxDiamonWidth, starsInCurrentRow);
 			addRowAbove(diamondBuilder, row);
@@ -44,7 +44,7 @@ public class Diamond {
 		return new String(createRow(maxDiamonWidth, maxDiamonWidth));
 	}
 
-	// confusing / hard to understand
+	// confusing / hard to understand => charsInRow is actually diamondWidth
 	private char[] createRow(int charsInRow, int starsInRow) {
 		int spacesBeforeStars = ((charsInRow - starsInRow) / 2);
 		char[] row = new char[spacesBeforeStars + starsInRow + 1];
