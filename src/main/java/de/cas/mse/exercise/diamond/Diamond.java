@@ -4,28 +4,32 @@ import java.util.Arrays;
 
 public class Diamond {
 
-	public String print(int n) {
-		if (n <= 0 || n % 2 == 0) {
+	public String createDiamond(int diamondSize) {
+		if (isInvalid(diamondSize)) {
 			return null;
 		}
-		StringBuilder builder = new StringBuilder(new String(make(n, n)));
-		for (int i = n - 2; i > 0; i -= 2) {
-			char[] chars = make(n, i);
-			builder.insert(0, chars);
-			builder.append(chars);
+		StringBuilder diamond = new StringBuilder(new String(buildLine(diamondSize, diamondSize)));
+		for (int amountStarsOfLine = diamondSize - 2; amountStarsOfLine > 0; amountStarsOfLine -= 2) {
+			char[] line = buildLine(diamondSize, amountStarsOfLine);
+			diamond.insert(0, line);
+			diamond.append(line);
 		}
-		return builder.toString();
+		return diamond.toString();
 	}
 
-	private char[] make(int i, int j) {
-		int amount = ((i - j) / 2);
-		char[] chars = new char[amount + j + 1];
-		if (amount > 0) {
-			Arrays.fill(chars, 0, amount, ' ');
+	private boolean isInvalid(int diamondSize) {
+		return diamondSize <= 0 || diamondSize % 2 == 0;
+	}
+
+	private char[] buildLine(int totalLength, int amountStars) {
+		int amountLeadingWhitespaces = ((totalLength - amountStars) / 2);
+		char[] line = new char[amountLeadingWhitespaces + amountStars + 1];
+		if (amountLeadingWhitespaces > 0) {
+			Arrays.fill(line, 0, amountLeadingWhitespaces, ' ');
 		}
-		Arrays.fill(chars, amount, amount + j, '*');
-		chars[chars.length - 1] = '\n';
-		return chars;
+		Arrays.fill(line, amountLeadingWhitespaces, amountLeadingWhitespaces + amountStars, '*');
+		line[line.length - 1] = '\n';
+		return line;
 	}
 
 }
