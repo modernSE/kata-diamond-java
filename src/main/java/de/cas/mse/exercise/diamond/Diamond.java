@@ -4,11 +4,11 @@ import java.util.Arrays;
 
 public class Diamond {
 
-	public String print(int maxWidth) {	//diamondSize would be more pregnant, since width and height are the same for diamonds
+	public String print(int maxWidth) {	//diamondSize would be more precise, since width and height are the same for diamonds
 		if (maxWidth <= 0 || maxWidth % 2 == 0) { //extract method for validation check
 			return null;
 		}
-		StringBuilder star = createStar(maxWidth);//is this a single * ? We print a diamond!
+		StringBuilder star = createStar(maxWidth);//is this a single * ? We print a diamond! -------
 		return star.toString();
 	}
 
@@ -21,7 +21,7 @@ public class Diamond {
 
 	private void addSurroundingLines(StringBuilder star, int maxWidth) {
 		int currentNumberOfStars = maxWidth - 2; 
-		while (currentNumberOfStars > 0) { //nice change <3
+		while (currentNumberOfStars > 0) { //nice change <3 +++++
 			addLine(star, maxWidth, currentNumberOfStars);
 			currentNumberOfStars -= 2;
 		}
@@ -31,7 +31,7 @@ public class Diamond {
 		star.append(createLine(maxWidth, maxWidth));
 	}
 
-	private void addLine(StringBuilder star, int maxWidth, int numberOfStars) {
+	private void addLine(StringBuilder star, int maxWidth, int numberOfStars) { // slightly better name bc it adds two lines --
 		String line = createLine(maxWidth, numberOfStars);
 		star.insert(0, line);
 		star.append(line);
