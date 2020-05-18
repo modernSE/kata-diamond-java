@@ -12,5 +12,7 @@ Wir haben diesen Code im Internet gefunden, dieser schreibt uns einen Diamanten 
 ```
 
 ## Aufgabe
-Der Code schwer zu verstehen. Wie funktioniert der **Algorithmus**? Was bedeuten die einzelnen Parameter und Variablen?
+Der Code ist schwer zu verstehen. Wie funktioniert der **Algorithmus**? Was bedeuten die einzelnen Parameter und Variablen?
 Kannst du hier helfen und den Code lesbarer machen?
+
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/modernSE/kata-diamond-java) 

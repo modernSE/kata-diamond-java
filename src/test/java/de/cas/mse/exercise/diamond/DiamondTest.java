@@ -13,7 +13,9 @@ public class DiamondTest {
 		expected.append("***\n");
 		expected.append(" *\n");
 
-		assertEquals(expected.toString(), new Diamond().print(3));
+        String actual = new Diamond().print(3);
+        assertEquals(expected.toString(),actual);
+        System.out.println(actual);
 	}
 
 	@Test
@@ -25,7 +27,9 @@ public class DiamondTest {
 		expected.append(" ***\n");
 		expected.append("  *\n");
 
-		assertEquals(expected.toString(), new Diamond().print(5));
+		String actual = new Diamond().print(5);
+        assertEquals(expected.toString(),actual);
+        System.out.println(actual);
 	}
 
 	@Test
