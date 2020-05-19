@@ -4,6 +4,8 @@ import java.util.Arrays;
 
 public class Diamond {
 
+    // yay
+
 	public String print(int n) {
 		if (n <= 0 || n % 2 == 0) {
 			return null;
