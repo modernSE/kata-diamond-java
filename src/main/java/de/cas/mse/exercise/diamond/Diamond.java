@@ -4,26 +4,26 @@ import java.util.Arrays;
 
 public class Diamond {
 
-	public String print(int n) {
-		if (n <= 0 || n % 2 == 0) {
+	public String print(int dimensions) {
+		if (dimensions <= 0 || dimensions % 2 == 0) {
 			return null;
 		}
-		StringBuilder builder = new StringBuilder(new String(make(n, n)));
-		for (int i = n - 2; i > 0; i -= 2) {
-			char[] chars = make(n, i);
+		StringBuilder builder = new StringBuilder(new String(GenerateRow(dimensions, dimensions)));
+		for (int AmountOfChars = dimensions - 2; AmountOfChars > 0; AmountOfChars -= 2) {
+			char[] chars = GenerateRow(dimensions, AmountOfChars);
 			builder.insert(0, chars);
 			builder.append(chars);
 		}
 		return builder.toString();
 	}
 
-	private char[] make(int i, int j) {
-		int amount = ((i - j) / 2);
-		char[] chars = new char[amount + j + 1];
-		if (amount > 0) {
-			Arrays.fill(chars, 0, amount, ' ');
+	private char[] GenerateRow(int row, int amountStars) {
+		int amountSpaces = ((row - amountStars) / 2);
+		char[] chars = new char[amountSpaces + amountStars + 1];
+		if (amountSpaces > 0) {
+			Arrays.fill(chars, 0, amountSpaces, ' ');
 		}
-		Arrays.fill(chars, amount, amount + j, '*');
+		Arrays.fill(chars, amountSpaces, amountSpaces + amountStars, '*');
 		chars[chars.length - 1] = '\n';
 		return chars;
 	}
