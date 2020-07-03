@@ -4,28 +4,44 @@ import java.util.Arrays;
 
 public class Diamond {
 
-	public String print(int n) {
-		if (n <= 0 || n % 2 == 0) {
+	public String createDiamond(int diamondSize) {
+		if (diamondSize <= 0 || diamondSize % 2 == 0) {
 			return null;
-		}
-		StringBuilder builder = new StringBuilder(new String(make(n, n)));
-		for (int i = n - 2; i > 0; i -= 2) {
-			char[] chars = make(n, i);
-			builder.insert(0, chars);
-			builder.append(chars);
-		}
-		return builder.toString();
+        }
+        
+        StringBuilder diamondBuilder = new StringBuilder(new String(createLine(diamondSize, diamondSize)));
+        
+		for (int i = diamondSize - 2; i > 0; i -= 2) {
+			char[] lineContent = createLine(diamondSize, i);
+			diamondBuilder.insert(0, lineContent);
+			diamondBuilder.append(lineContent);
+        }
+        
+		return diamondBuilder.toString();
 	}
 
-	private char[] make(int i, int j) {
-		int amount = ((i - j) / 2);
-		char[] chars = new char[amount + j + 1];
-		if (amount > 0) {
-			Arrays.fill(chars, 0, amount, ' ');
-		}
-		Arrays.fill(chars, amount, amount + j, '*');
-		chars[chars.length - 1] = '\n';
-		return chars;
+	private char[] createLine(int maxStarCount, int currentStarCount) {
+
+        int indexOfFirstStar = ((maxStarCount - currentStarCount) / 2);
+        char[] lineContent = new char[indexOfFirstStar + currentStarCount + 1];
+        
+		lineContent = fillWhiteSpaceInLine(indexOfFirstStar, lineContent);
+        
+		return fillStarsInLine(currentStarCount, indexOfFirstStar, lineContent);
 	}
+
+    private char[] fillWhiteSpaceInLine(int indexOfFirstStar, char[] lineContent) {
+        if (indexOfFirstStar > 0) {
+            Arrays.fill(lineContent, 0, indexOfFirstStar, ' ');
+        }
+
+        return lineContent;
+    }
+
+    private char[] fillStarsInLine(int currentStarCount, int indexOfFirstStar, char[] lineContent) {
+        Arrays.fill(lineContent, indexOfFirstStar, indexOfFirstStar + currentStarCount, '*');
+		lineContent[lineContent.length - 1] = '\n';
+		return lineContent;
+    }
 
 }
