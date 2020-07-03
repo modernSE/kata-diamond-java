@@ -4,28 +4,28 @@ import java.util.Arrays;
 
 public class Diamond {
 
-	public String print(int n) {
-		if (n <= 0 || n % 2 == 0) {
+	public String constructDiamond(int diamondDiameter) {
+		if (diamondDiameter <= 0 || diamondDiameter % 2 == 0) {
 			return null;
 		}
-		StringBuilder builder = new StringBuilder(new String(make(n, n)));
-		for (int i = n - 2; i > 0; i -= 2) {
-			char[] chars = make(n, i);
-			builder.insert(0, chars);
-			builder.append(chars);
+		StringBuilder diamondBuilder = new StringBuilder(new String(createDiamondRow(diamondDiameter, diamondDiameter)));
+		for (int space = diamondDiameter - 2; space > 0; space -= 2) {
+			char[] diamondRow = createDiamondRow(diamondDiameter, space);
+			diamondBuilder.insert(0, diamondRow);
+			diamondBuilder.append(diamondRow);
 		}
-		return builder.toString();
+		return diamondBuilder.toString();
 	}
 
-	private char[] make(int i, int j) {
-		int amount = ((i - j) / 2);
-		char[] chars = new char[amount + j + 1];
-		if (amount > 0) {
-			Arrays.fill(chars, 0, amount, ' ');
+	private char[] createDiamondRow(int diameter, int space) {
+		int rowPaddingLeft = ((diameter - space) / 2);
+		char[] row = new char[rowPaddingLeft + space + 1];
+		if (rowPaddingLeft > 0) {
+			Arrays.fill(row, 0, rowPaddingLeft, ' ');
 		}
-		Arrays.fill(chars, amount, amount + j, '*');
-		chars[chars.length - 1] = '\n';
-		return chars;
+		Arrays.fill(row, rowPaddingLeft, rowPaddingLeft + space, '*');
+		row[row.length - 1] = '\n';
+		return row;
 	}
 
 }
