@@ -4,28 +4,29 @@ import java.util.Arrays;
 
 public class Diamond {
 
-	public String print(int n) {
-		if (n <= 0 || n % 2 == 0) {
+	public String print(int width) {
+		if (width <= 0 || width % 2 == 0) {
 			return null;
 		}
-		StringBuilder builder = new StringBuilder(new String(make(n, n)));
-		for (int i = n - 2; i > 0; i -= 2) {
-			char[] chars = make(n, i);
-			builder.insert(0, chars);
-			builder.append(chars);
+        StringBuilder builder = new StringBuilder();
+        builder.append(generateLine(width, width));
+		for (int currentWidth = width - 2; currentWidth > 0; currentWidth -= 2) {
+			char[] line = generateLine(width, currentWidth);
+			builder.insert(0, line);
+			builder.append(line);
 		}
 		return builder.toString();
 	}
 
-	private char[] make(int i, int j) {
-		int amount = ((i - j) / 2);
-		char[] chars = new char[amount + j + 1];
-		if (amount > 0) {
-			Arrays.fill(chars, 0, amount, ' ');
+	private char[] generateLine(int maxWidth, int currentWidth) {
+		int leadingSpaces = ((maxWidth - currentWidth) / 2);
+		char[] line = new char[leadingSpaces + currentWidth + 1];
+		if (leadingSpaces > 0) {
+			Arrays.fill(line, 0, leadingSpaces, ' ');
 		}
-		Arrays.fill(chars, amount, amount + j, '*');
-		chars[chars.length - 1] = '\n';
-		return chars;
+		Arrays.fill(line, leadingSpaces, leadingSpaces + currentWidth, '*');
+		line[line.length - 1] = '\n';
+		return line;
 	}
 
 }
