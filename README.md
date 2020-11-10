@@ -1,8 +1,9 @@
 # Diamond Kata
 
-Wir wollen unserer Freundin/unserem Freund ein kleines Geschenk machen. Einen kleinen Diamanten! Aber auf der nerdigsten Art und Weise, nämlich in ASCII-Art!
+We want to make our loved one happy and what better way than giving a sparkling little diamond?
+But of course in the most geeky way possible: ASCII art!
 
-Wir haben diesen Code im Internet gefunden, dieser schreibt uns einen Diamanten auf die Konsole raus. Wie z.B. diesen hier:
+We even already have found an open source project wich does exactly that! For examle it prints:
 ```
   *
  ***
@@ -11,8 +12,8 @@ Wir haben diesen Code im Internet gefunden, dieser schreibt uns einen Diamanten 
   *
 ```
 
-## Aufgabe
-Der Code ist schwer zu verstehen. Wie funktioniert der **Algorithmus**? Was bedeuten die einzelnen Parameter und Variablen?
-Kannst du hier helfen und den Code lesbarer machen?
+## Task
+Hmm... but it is a little difficult to understand. How does the **algorythm** even work? What do the paramameters and variables mean?
+Can you help out and make the code better? Focus on naming! Structural refactorings only if you are happy with the naming.
 
 [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/modernSE/kata-diamond-java) 
