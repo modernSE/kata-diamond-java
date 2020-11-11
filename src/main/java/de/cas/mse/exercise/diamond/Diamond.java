@@ -3,9 +3,6 @@ package de.cas.mse.exercise.diamond;
 import java.util.Arrays;
 
 public class Diamond {
-    public static void main(String[] args) {
-        System.out.println(new Diamond().generateDiamond(5));
-    }
 
 	public String generateDiamond(int height) {
 		if (!isValidDiamondShape(height)) {
@@ -16,19 +13,19 @@ public class Diamond {
         // iteratively expand diamond towards top and bottom
 		for (int asterisks = height - 2; asterisks > 0; asterisks -= 2) {
 			char[] line = makeLine(height, asterisks);
-			diamond.insert(0, line);
+            diamond.insert(0, line);
 			diamond.append(line);
 		}
 		return diamond.toString();
     }
     
     private boolean isValidDiamondShape(int height) {
-        return height <= 0 || height % 2 == 0;
+        return height > 0 && height % 2 != 0;
     }
 
 	private char[] makeLine(int diamondWidth, int numberOfAsterisks) {
-		int padding = ((diamondWidth - numberOfAsterisks) / 2);
-		char[] line = new char[padding + numberOfAsterisks + 1];
+		int padding = (diamondWidth - numberOfAsterisks) / 2;
+		char[] line = new char[padding + numberOfAsterisks + 1 /* newline */];
 		if (padding > 0) {
 			Arrays.fill(line, 0, padding, ' ');
 		}
