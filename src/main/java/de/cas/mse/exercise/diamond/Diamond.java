@@ -4,28 +4,28 @@ import java.util.Arrays;
 
 public class Diamond {
 
-	public String print(int n) {
-		if (n <= 0 || n % 2 == 0) {
+	public String print(int size) {
+		if (size <= 0 || size % 2 == 0) {
 			return null;
 		}
-		StringBuilder builder = new StringBuilder(new String(make(n, n)));
-		for (int i = n - 2; i > 0; i -= 2) {
-			char[] chars = make(n, i);
-			builder.insert(0, chars);
-			builder.append(chars);
+		StringBuilder diamond = new StringBuilder(new String(createLine(size, size)));
+		for (int numberOfStars = size - 2; numberOfStars > 0; numberOfStars -= 2) {
+			char[] line = createLine(size, numberOfStars);
+			diamond.insert(0, line);
+			diamond.append(line);
 		}
-		return builder.toString();
+		return diamond.toString();
 	}
 
-	private char[] make(int i, int j) {
-		int amount = ((i - j) / 2);
-		char[] chars = new char[amount + j + 1];
-		if (amount > 0) {
-			Arrays.fill(chars, 0, amount, ' ');
+	private char[] createLine(int maxWidth, int width) {
+		int padding = ((maxWidth - width) / 2);
+		char[] line = new char[padding + width + 1];
+		if (padding > 0) {
+			Arrays.fill(line, 0, padding, ' ');
 		}
-		Arrays.fill(chars, amount, amount + j, '*');
-		chars[chars.length - 1] = '\n';
-		return chars;
+		Arrays.fill(line, padding, padding + width, '*');
+		line[line.length - 1] = '\n';
+		return line;
 	}
 
 }
