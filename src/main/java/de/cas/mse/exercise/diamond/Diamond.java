@@ -4,28 +4,41 @@ import java.util.Arrays;
 
 public class Diamond {
 
-	public String print(int n) {
-		if (n <= 0 || n % 2 == 0) {
+	public String print(int numberOfRows) {
+		if (isInvalidDiamond(numberOfRows)) {
 			return null;
+        }
+        String middleLine = new String(createLine(numberOfRows, numberOfRows));
+		StringBuilder diamondBuilder = new StringBuilder(middleLine);
+		for (int numberOfStars = numberOfRows - 2; numberOfStars > 0; numberOfStars -= 2) {
+            char[] line = createLine(numberOfRows, numberOfStars);
+            insertLineAbove(diamondBuilder, line); 
+            insertLineBelow(diamondBuilder, line);
 		}
-		StringBuilder builder = new StringBuilder(new String(make(n, n)));
-		for (int i = n - 2; i > 0; i -= 2) {
-			char[] chars = make(n, i);
-			builder.insert(0, chars);
-			builder.append(chars);
-		}
-		return builder.toString();
-	}
+		return diamondBuilder.toString();
+    }
+    
+    private void insertLineAbove(StringBuilder builder, char[] line) {
+        builder.insert(0, line);
+    }
 
-	private char[] make(int i, int j) {
-		int amount = ((i - j) / 2);
-		char[] chars = new char[amount + j + 1];
-		if (amount > 0) {
-			Arrays.fill(chars, 0, amount, ' ');
+    private void insertLineBelow(StringBuilder builder, char[] line) {
+        builder.append(line);
+    }
+
+	private char[] createLine(int numberOfRows, int numberOfStars) {
+		int numberOfSpaces = ((numberOfRows - numberOfStars) / 2);
+		char[] line = new char[numberOfSpaces + numberOfStars + 1];
+		if (numberOfSpaces > 0) {
+			Arrays.fill(line, 0, numberOfSpaces, ' ');
 		}
-		Arrays.fill(chars, amount, amount + j, '*');
-		chars[chars.length - 1] = '\n';
-		return chars;
-	}
+		Arrays.fill(line, numberOfSpaces, numberOfSpaces + numberOfStars, '*');
+		line[line.length - 1] = '\n';
+		return line;
+    }
+    
+    private boolean isInvalidDiamond(int numberOfRows) {
+        return (numberOfRows <= 0 || numberOfRows % 2 == 0);
+    }
 
 }
