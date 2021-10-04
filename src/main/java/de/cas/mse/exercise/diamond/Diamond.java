@@ -4,20 +4,20 @@ import java.util.Arrays;
 
 public class Diamond {
 
-	public String print(int n) {
-		if (n <= 0 || n % 2 == 0) {
+	public String printDiamond(int diamondHeight) {
+		if (isInvalidDiamondHeight(diamondHeight)) {
 			return null;
 		}
-		StringBuilder builder = new StringBuilder(new String(make(n, n)));
-		for (int i = n - 2; i > 0; i -= 2) {
-			char[] chars = make(n, i);
+		StringBuilder builder = new StringBuilder(new String(make(diamondHeight, diamondHeight)));
+		for (int i = diamondHeight - 2; i > 0; i -= 2) {
+			char[] chars = make(diamondHeight, i);
 			builder.insert(0, chars);
 			builder.append(chars);
 		}
 		return builder.toString();
 	}
 
-	private char[] make(int i, int j) {
+	private char[] make(int i, int starCount) {
 		int amount = ((i - j) / 2);
 		char[] chars = new char[amount + j + 1];
 		if (amount > 0) {
@@ -26,6 +26,10 @@ public class Diamond {
 		Arrays.fill(chars, amount, amount + j, '*');
 		chars[chars.length - 1] = '\n';
 		return chars;
+	}
+
+	private boolean isInvalidDiamondHeight(int diamondHeight) {
+		return diamondHeight <= 0 || diamondHeight % 2 == 0;
 	}
 
 }
