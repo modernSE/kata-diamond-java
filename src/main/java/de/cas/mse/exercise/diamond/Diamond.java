@@ -4,21 +4,25 @@ import java.util.Arrays;
 
 public class Diamond {
 
-	public String print(int n) {
+	public String createDiamond(int n) {
 		if (n <= 0 || n % 2 == 0) {
 			return null;
 		}
-		StringBuilder builder = new StringBuilder(new String(make(n, n)));
-		for (int i = n - 2; i > 0; i -= 2) {
-			char[] chars = make(n, i);
+		return createLines(n);
+	}
+
+	private String createLines(int diamondDiameter) {
+		StringBuilder builder = new StringBuilder(new String(createLine(diamondDiameter, diamondDiameter)));
+		for (int i = diamondDiameter - 2; i > 0; i -= 2) {
+			char[] chars = createLine(diamondDiameter, i);
 			builder.insert(0, chars);
 			builder.append(chars);
 		}
 		return builder.toString();
 	}
 
-	private char[] make(int i, int j) {
-		int amount = ((i - j) / 2);
+	private char[] createLine(int diamondDiameter, int j) {
+		int amount = ((diamondDiameter - j) / 2);
 		char[] chars = new char[amount + j + 1];
 		if (amount > 0) {
 			Arrays.fill(chars, 0, amount, ' ');
