@@ -4,28 +4,53 @@ import java.util.Arrays;
 
 public class Diamond {
 
-	public String print(int n) {
-		if (n <= 0 || n % 2 == 0) {
+	public String print(int dimension) {
+		if (dimension <= 0 || dimension % 2 == 0) {
 			return null;
 		}
-		StringBuilder builder = new StringBuilder(new String(make(n, n)));
-		for (int i = n - 2; i > 0; i -= 2) {
-			char[] chars = make(n, i);
-			builder.insert(0, chars);
-			builder.append(chars);
+
+		char[] centralRow = createRow(dimension, dimension);
+		StringBuilder builder = new StringBuilder(new String(centralRow));
+
+		for (int i = dimension - 2; i > 0; i -= 2) {
+			char[] row = createRow(dimension, i);
+			addSurroundingRows(builder, row);
 		}
 		return builder.toString();
 	}
 
-	private char[] make(int i, int j) {
-		int amount = ((i - j) / 2);
-		char[] chars = new char[amount + j + 1];
-		if (amount > 0) {
-			Arrays.fill(chars, 0, amount, ' ');
+	private void addSurroundingRows(StringBuilder builder, char[] row) {
+		addToFront(builder, row);
+		addToBack(builder, row);
+	}
+
+	private void addToFront(StringBuilder builder, char[] row) {
+		builder.insert(0, row);
+	}
+
+	private void addToBack(StringBuilder builder, char[] row) {
+		builder.append(row);
+	}
+
+	private char[] createRow(int dimension, int amountStars) {
+		int amountWhiteSpace = ((dimension - amountStars) / 2);
+		char[] row = new char[amountWhiteSpace + amountStars + 1];
+
+		createLeadingWhiteSpace(row, amountWhiteSpace);
+		addStars(row, amountStars, amountWhiteSpace);
+
+		row[row.length - 1] = '\n';
+		return row;
+	}
+
+	private void addStars(char[] row, int amountStars, int amountWhiteSpace) {
+		Arrays.fill(row, amountWhiteSpace, amountWhiteSpace + amountStars, '*');
+	}
+
+	private void createLeadingWhiteSpace(char[] row, int amountWhiteSpace) {
+		if (amountWhiteSpace <= 0) {
+			 Arrays.fill(row, 0, amountWhiteSpace, ' ');
 		}
-		Arrays.fill(chars, amount, amount + j, '*');
-		chars[chars.length - 1] = '\n';
-		return chars;
 	}
 
 }
