@@ -8,42 +8,42 @@ public class DiamondTest {
 
 	@Test
 	public void diamond3_shouldPrint() {
-		StringBuffer expected = new StringBuffer();
-		expected.append(" *\n");
-		expected.append("***\n");
-		expected.append(" *\n");
+		StringBuffer expectedResult = new StringBuffer();
+		expectedResult.append(" *\n");
+		expectedResult.append("***\n");
+		expectedResult.append(" *\n");
 
-        String actual = new Diamond().print(3);
-        assertEquals(expected.toString(),actual);
-        System.out.println(actual);
+        String actualResult = new Diamond().renderDiamond(3);
+        assertEquals(expectedResult.toString(),actualResult);
+        System.out.println(actualResult);
 	}
 
 	@Test
 	public void diamond5_shouldPrint() {
-		StringBuffer expected = new StringBuffer();
-		expected.append("  *\n");
-		expected.append(" ***\n");
-		expected.append("*****\n");
-		expected.append(" ***\n");
-		expected.append("  *\n");
+		StringBuffer expectedResult = new StringBuffer();
+		expectedResult.append("  *\n");
+		expectedResult.append(" ***\n");
+		expectedResult.append("*****\n");
+		expectedResult.append(" ***\n");
+		expectedResult.append("  *\n");
 
-		String actual = new Diamond().print(5);
-        assertEquals(expected.toString(),actual);
-        System.out.println(actual);
+		String actualResult = new Diamond().renderDiamond(5);
+        assertEquals(expectedResult.toString(),actualResult);
+        System.out.println(actualResult);
 	}
 
 	@Test
 	public void diamond0_shouldReturnNull() {
-		assertEquals(null, new Diamond().print(0));
+		assertEquals(null, new Diamond().renderDiamond(0));
 	}
 
 	@Test
 	public void diamondNegative_shouldReturnNull() {
-		assertEquals(null, new Diamond().print(-1));
+		assertEquals(null, new Diamond().renderDiamond(-1));
 	}
 
 	@Test
 	public void diamondEven_shouldReturnNull() {
-		assertEquals(null, new Diamond().print(10));
+		assertEquals(null, new Diamond().renderDiamond(10));
 	}
 }
