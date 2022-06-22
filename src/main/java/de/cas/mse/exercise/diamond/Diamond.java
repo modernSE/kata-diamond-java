@@ -4,28 +4,28 @@ import java.util.Arrays;
 
 public class Diamond {
 
-	public String print(int n) {
-		if (n <= 0 || n % 2 == 0) {
+	public String renderDiamond(int maximumDiamondWidth) {
+		if (maximumDiamondWidth <= 0 || maximumDiamondWidth % 2 == 0) {
 			return null;
 		}
-		StringBuilder builder = new StringBuilder(new String(make(n, n)));
-		for (int i = n - 2; i > 0; i -= 2) {
-			char[] chars = make(n, i);
-			builder.insert(0, chars);
-			builder.append(chars);
+		StringBuilder drawingCanvas = new StringBuilder(new String(renderDiamondLine(maximumDiamondWidth, maximumDiamondWidth)));
+		for (int charsPerLine = maximumDiamondWidth - 2; charsPerLine > 0; charsPerLine -= 2) {
+			char[] singleDiamondLine = renderDiamondLine(maximumDiamondWidth, charsPerLine);
+			drawingCanvas.insert(0, singleDiamondLine);
+			drawingCanvas.append(singleDiamondLine);
 		}
-		return builder.toString();
+		return drawingCanvas.toString();
 	}
 
-	private char[] make(int i, int j) {
-		int amount = ((i - j) / 2);
-		char[] chars = new char[amount + j + 1];
-		if (amount > 0) {
-			Arrays.fill(chars, 0, amount, ' ');
+	private char[] renderDiamondLine(int maxiumLineWidth, int numberOfCharsPerLine) {
+		int offset = ((maxiumLineWidth - numberOfCharsPerLine) / 2);
+		char[] result = new char[offset + numberOfCharsPerLine + 1];
+		if (offset > 0) {
+			Arrays.fill(result, 0, offset, ' ');
 		}
-		Arrays.fill(chars, amount, amount + j, '*');
-		chars[chars.length - 1] = '\n';
-		return chars;
+		Arrays.fill(result, offset, offset + numberOfCharsPerLine, '*');
+		result[result.length - 1] = '\n';
+		return result;
 	}
 
 }
