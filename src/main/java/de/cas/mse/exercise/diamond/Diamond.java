@@ -4,28 +4,42 @@ import java.util.Arrays;
 
 public class Diamond {
 
-	public String print(int n) {
-		if (n <= 0 || n % 2 == 0) {
+	public String print(int diamondSize) {
+		if (diamondSize <= 0 || diamondSize % 2 == 0) {
 			return null;
 		}
-		StringBuilder builder = new StringBuilder(new String(make(n, n)));
-		for (int i = n - 2; i > 0; i -= 2) {
-			char[] chars = make(n, i);
-			builder.insert(0, chars);
-			builder.append(chars);
+
+		StringBuilder diamond = new StringBuilder(new String(buildDiamondRow(diamondSize, diamondSize)));
+
+		for (int i = diamondSize - 2; i > 0; i -= 2) {
+			char[] diamondRow = buildDiamondRow(diamondSize, i);
+			addRowOnTop(diamond, diamondRow);
+			addRowOnBottom(diamond, diamondRow);
 		}
-		return builder.toString();
+		return diamond.toString();
 	}
 
-	private char[] make(int i, int j) {
-		int amount = ((i - j) / 2);
-		char[] chars = new char[amount + j + 1];
+	private char[] buildDiamondRow(int diamondSize, int j) {
+		int amount = ((diamondSize - j) / 2);
+		char[] row = new char[amount + j + 1];
 		if (amount > 0) {
-			Arrays.fill(chars, 0, amount, ' ');
+			Arrays.fill(row, 0, amount, ' ');
 		}
-		Arrays.fill(chars, amount, amount + j, '*');
+		Arrays.fill(row, amount, amount + j, '*');
+		addLineBreakToRow(row);
+		return row;
+	}
+
+	private void addRowOnTop(StringBuilder diamond, char[] diamondRow) {
+		diamond.insert(0, diamondRow);
+	}
+
+	private void addRowOnBottom(StringBuilder diamond, char[] diamondRow) {
+		diamond.append(diamondRow);
+	}
+
+	private void addLineBreakToRow(char[] chars) {
 		chars[chars.length - 1] = '\n';
-		return chars;
 	}
 
 }
