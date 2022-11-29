@@ -1,8 +1,8 @@
 package de.cas.mse.exercise.diamond;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class DiamondTest {
 
@@ -13,9 +13,9 @@ public class DiamondTest {
 		expected.append("***\n");
 		expected.append(" *\n");
 
-        String actual = new Diamond().print(3);
-        assertEquals(expected.toString(),actual);
-        System.out.println(actual);
+		String actual = new Diamond().print(3);
+		assertEquals(expected.toString(), actual);
+		System.out.println(actual);
 	}
 
 	@Test
@@ -28,8 +28,8 @@ public class DiamondTest {
 		expected.append("  *\n");
 
 		String actual = new Diamond().print(5);
-        assertEquals(expected.toString(),actual);
-        System.out.println(actual);
+		assertEquals(expected.toString(), actual);
+		System.out.println(actual);
 	}
 
 	@Test
