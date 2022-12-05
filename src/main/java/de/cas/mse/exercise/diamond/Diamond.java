@@ -4,28 +4,34 @@ import java.util.Arrays;
 
 public class Diamond {
 
-	public String print(int n) {
-		if (n <= 0 || n % 2 == 0) {
+	private int diamondSize;
+
+	public String print(int diamondSize) {
+		this.diamondSize = diamondSize;
+
+		if (diamondSize <= 0 || diamondSize % 2 == 0) {
 			return null;
 		}
-		StringBuilder builder = new StringBuilder(new String(make(n, n)));
-		for (int i = n - 2; i > 0; i -= 2) {
-			char[] chars = make(n, i);
-			builder.insert(0, chars);
-			builder.append(chars);
+		StringBuilder builder = new StringBuilder(new String(makeStarsLine(diamondSize)));
+		for (int i = diamondSize - 2; i > 0; i -= 2) {
+			char[] starsLine = makeStarsLine(i);
+			builder.insert(0, starsLine);
+			builder.append(starsLine);
 		}
 		return builder.toString();
 	}
 
-	private char[] make(int i, int j) {
-		int amount = ((i - j) / 2);
-		char[] chars = new char[amount + j + 1];
-		if (amount > 0) {
-			Arrays.fill(chars, 0, amount, ' ');
+	private char[] makeStarsLine(int j) {
+		int amountOfStars = ((diamondSize - j) / 2);
+		char[] starsLine = new char[amountOfStars + j + 1];
+		if (amountOfStars > 0) {
+			Arrays.fill(starsLine, 0, amountOfStars, ' ');
 		}
-		Arrays.fill(chars, amount, amount + j, '*');
-		chars[chars.length - 1] = '\n';
-		return chars;
+		int fromIndex = amountOfStars;
+		int toIndex = amountOfStars +j;
+		Arrays.fill(starsLine, fromIndex, toIndex, '*');
+		starsLine[starsLine.length - 1] = '\n';
+		return starsLine;
 	}
 
 }
