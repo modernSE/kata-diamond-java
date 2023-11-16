@@ -4,28 +4,38 @@ import java.util.Arrays;
 
 public class Diamond {
 
-	public String print(int n) {
-		if (n <= 0 || n % 2 == 0) {
-			return null;
-		}
-		StringBuilder builder = new StringBuilder(new String(make(n, n)));
-		for (int i = n - 2; i > 0; i -= 2) {
-			char[] chars = make(n, i);
+	private final char WHITESPACE = ' ';
+
+	private final char STAR = '*';
+
+	private final Character NEW_LINE = '\n';
+
+	public String print(int width) {
+		if (invalidInput(width)) return null;
+		
+		StringBuilder builder = new StringBuilder(new String(generateLine(width, width)));
+		for (int currentHeight = width - 2; currentHeight > 0; currentHeight -= 2) {
+			char[] chars = generateLine(width, currentHeight);
 			builder.insert(0, chars);
 			builder.append(chars);
 		}
 		return builder.toString();
 	}
 
-	private char[] make(int i, int j) {
-		int amount = ((i - j) / 2);
-		char[] chars = new char[amount + j + 1];
-		if (amount > 0) {
-			Arrays.fill(chars, 0, amount, ' ');
+	private char[] generateLine(int maxWidth, int currentWidth) {
+		int center = ((maxWidth - currentWidth) / 2);
+		char[] line = new char[center + currentWidth + 1];
+		if (center > 0) {
+			Arrays.fill(line, 0, center, WHITESPACE);
 		}
-		Arrays.fill(chars, amount, amount + j, '*');
-		chars[chars.length - 1] = '\n';
-		return chars;
+		Arrays.fill(line, center, center + currentWidth, STAR);
+		line[line.length - 1] = NEW_LINE;
+
+		return line;
+	}
+
+	private Boolean invalidInput(int width){
+		return width <= 0 || width % 2 == 0;
 	}
 
 }
