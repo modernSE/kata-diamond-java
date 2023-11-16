@@ -1,31 +1,34 @@
 package de.cas.mse.exercise.diamond;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Diamond {
 
-	public String print(int n) {
-		if (n <= 0 || n % 2 == 0) {
+	public String createDiamond(int lineCount) {
+		if (lineCount <= 0 || lineCount % 2 == 0) {
 			return null;
 		}
-		StringBuilder builder = new StringBuilder(new String(make(n, n)));
-		for (int i = n - 2; i > 0; i -= 2) {
-			char[] chars = make(n, i);
-			builder.insert(0, chars);
-			builder.append(chars);
+
+		var lines = new ArrayList<String>();
+		lines.add(buildLine(lineCount, lineCount));
+		for (int i = lineCount - 2; i > 0; i -= 2) {
+			String line = buildLine(lineCount, i);
+			lines.add(0, line);
+			lines.add(line);
 		}
-		return builder.toString();
+		return String.join("\n", lines) + "\n";
 	}
 
-	private char[] make(int i, int j) {
-		int amount = ((i - j) / 2);
-		char[] chars = new char[amount + j + 1];
-		if (amount > 0) {
-			Arrays.fill(chars, 0, amount, ' ');
-		}
-		Arrays.fill(chars, amount, amount + j, '*');
-		chars[chars.length - 1] = '\n';
-		return chars;
+	private String buildLine(int lineLenght, int stars) {
+		int whiteSpaces = ((lineLenght - stars) / 2);
+		return createFilledString(whiteSpaces, ' ') + createFilledString(stars, '*');
+	}
+
+	private String createFilledString(int lenght, char character) {
+		char[] stringContent = new char[lenght];
+		Arrays.fill(stringContent, character);
+		return new String(stringContent);
 	}
 
 }
