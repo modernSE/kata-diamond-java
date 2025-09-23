@@ -14,3 +14,5 @@ Wir haben diesen Code im Internet gefunden, dieser schreibt uns einen Diamanten 
 ## Aufgabe
 Der Code ist schwer zu verstehen. Wie funktioniert der **Algorithmus**? Was bedeuten die einzelnen Parameter und Variablen?
 Kannst du hier helfen und den Code lesbarer machen?
+
+uff, net so leicht :D
