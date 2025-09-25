@@ -4,7 +4,7 @@ package de.cas.mse.exercise.diamond;
 // TODO make diamond factory 💸
 public class Diamond {
 
-	public String create(int numberOfRows) {
+	public String print(int numberOfRows) {
 		if (numberOfRows <= 0 || numberOfRows % 2 == 0) {
 			return "";
 		}
