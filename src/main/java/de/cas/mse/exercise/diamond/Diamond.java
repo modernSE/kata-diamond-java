@@ -4,28 +4,29 @@ import java.util.Arrays;
 
 public class Diamond {
 
-	public String print(int n) {
-		if (n <= 0 || n % 2 == 0) {
+	public String print(int diameter) {
+		boolean isOddPositive = diameter <= 0 || diameter % 2 == 0;
+		if (isOddPositive) {
 			return null;
 		}
-		StringBuilder builder = new StringBuilder(new String(make(n, n)));
-		for (int i = n - 2; i > 0; i -= 2) {
-			char[] chars = make(n, i);
-			builder.insert(0, chars);
-			builder.append(chars);
+		StringBuilder builder = new StringBuilder(new String(createRowWithCenteredStars(diameter, diameter)));
+		for (int stars = diameter - 2; stars > 0; stars -= 2) {
+			char[] rows = createRowWithCenteredStars(diameter, stars);
+			builder.insert(0, rows);
+			builder.append(rows);
 		}
 		return builder.toString();
 	}
 
-	private char[] make(int i, int j) {
-		int amount = ((i - j) / 2);
-		char[] chars = new char[amount + j + 1];
-		if (amount > 0) {
-			Arrays.fill(chars, 0, amount, ' ');
+	private char[] createRowWithCenteredStars(int virtualRowLength, int starAmount) {
+		int indent = ((virtualRowLength - starAmount) / 2);
+		char[] row = new char[indent + starAmount + 1];
+		if (indent > 0) {
+			Arrays.fill(row, 0, indent, ' ');
 		}
-		Arrays.fill(chars, amount, amount + j, '*');
-		chars[chars.length - 1] = '\n';
-		return chars;
+		Arrays.fill(row, indent, indent + starAmount, '*');
+		row[row.length - 1] = '\n';
+		return row;
 	}
 
 }
