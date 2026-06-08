@@ -4,28 +4,37 @@ import java.util.Arrays;
 
 public class Diamond {
 
-	public String print(int n) {
-		if (n <= 0 || n % 2 == 0) {
+	private final char DIAMOND_CONTENT = '*';
+	private final char WHITESPACE_CONTENT = ' ';
+	private final char NEWLINE_CONTENT = '\n';
+
+	public String printDiamond(int diamondSize) {
+		if (diamondSize <= 0 || diamondSize % 2 == 0) {
 			return null;
 		}
-		StringBuilder builder = new StringBuilder(new String(make(n, n)));
-		for (int i = n - 2; i > 0; i -= 2) {
-			char[] chars = make(n, i);
-			builder.insert(0, chars);
-			builder.append(chars);
+		char[] constructedShape = constructShape(diamondSize, diamondSize);
+		String initShape = String.valueOf(constructedShape);
+		return mirroringDiamondShape(initShape, diamondSize);
+	}
+	private String mirroringDiamondShape(String constructedShape, int diamondSize) {
+		StringBuilder shape = new StringBuilder(constructedShape);
+		for (int i = diamondSize - 2; i > 0; i -= 2) {
+			char[] chars = constructShape(diamondSize, i);
+			shape.insert(0, chars);
+			shape.append(chars);
 		}
-		return builder.toString();
+		return shape.toString();
 	}
 
-	private char[] make(int i, int j) {
-		int amount = ((i - j) / 2);
-		char[] chars = new char[amount + j + 1];
+	private char[] constructShape(int column, int row) {
+		int amount = ((column - row) / 2);
+		char[] shape = new char[amount + row + 1];
 		if (amount > 0) {
-			Arrays.fill(chars, 0, amount, ' ');
+			Arrays.fill(shape, 0, amount, WHITESPACE_CONTENT);
 		}
-		Arrays.fill(chars, amount, amount + j, '*');
-		chars[chars.length - 1] = '\n';
-		return chars;
+		Arrays.fill(shape, amount, amount + row, DIAMOND_CONTENT);
+		shape[shape.length - 1] = NEWLINE_CONTENT;
+		return shape;
 	}
 
 }
